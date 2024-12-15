@@ -1,2 +1,38 @@
-# InfoScout_OSINT
-InfoScout is a Python-based OSINT tool designed for efficient information gathering, featuring trackers for IPs, phone numbers, emails, metadata, and web analysis tools like CMS detection and Whois lookup.
+
+# InfoScout
+
+InfoScout is a Python-based OSINT tool for information gathering.
+
+## Features
+- IP Tracker
+- Phone Number Tracker
+- MAC Address Lookup
+- Email Scanner
+- Metadata Extractor
+- Reverse Image Search
+- Port Scanner
+- CMS Detection
+- NSLookup
+- Reverse IP Lookup
+- Subdomain Enumeration
+- Whois Lookup
+
+## Installation
+```bash
+git clone https://github.com/<your-username>/InfoScout
+cd InfoScout
+pip install -r requirements.txt
+```
+
+## Usage
+### OSINT Trackers
+```bash
+python3 infoscout.py
+```
+### WebOSINT
+```bash
+python3 webosint.py
+```
+
+## License
+GPL-3.0 License
