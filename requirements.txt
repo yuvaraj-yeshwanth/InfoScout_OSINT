@@ -2,5 +2,5 @@
 requests
 beautifulsoup4
 python-whois
-socket
 python-nmap
+
