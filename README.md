@@ -1,4 +1,3 @@
-
 # InfoScout
 
 InfoScout is a Python-based OSINT tool for information gathering.
@@ -21,11 +20,7 @@ InfoScout is a Python-based OSINT tool for information gathering.
 
 bash
 git clone git clone https://github.com/yuvaraj-yeshwanth/InfoScout
-
-bash
 cd InfoScout
-
-bash
 pip install -r requirements.txt
 
 
