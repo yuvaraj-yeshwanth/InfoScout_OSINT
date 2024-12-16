@@ -1,3 +1,4 @@
+
 # InfoScout
 
 InfoScout is a Python-based OSINT tool for information gathering.
@@ -17,27 +18,21 @@ InfoScout is a Python-based OSINT tool for information gathering.
 - Whois Lookup
 
 ## Installation
-
-bash
-git clone git clone https://github.com/yuvaraj-yeshwanth/InfoScout
+```bash
+git clone https://github.com/<your-username>/InfoScout
 cd InfoScout
 pip install -r requirements.txt
-
-
+```
 
 ## Usage
 ### OSINT Trackers
-
-bash
+```bash
 python3 infoscout.py
-
-
+```
 ### WebOSINT
-
-bash
+```bash
 python3 webosint.py
-
-
+```
 
 ## License
 GPL-3.0 License
