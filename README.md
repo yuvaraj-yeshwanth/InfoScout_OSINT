@@ -23,7 +23,7 @@ To avoid system-level Python restrictions, we recommend using a virtual environm
 
 ### Step 1: Clone the Repository
 ```bash
-git clone https://github.com/yuvaraj-yeshwanth/InfoScout
+git clone https://github.com/yuvaraj-yeshwanth/InfoScout_OSINT.git
 cd InfoScout
 ```
 
