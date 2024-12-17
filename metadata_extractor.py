@@ -1,9 +1,9 @@
 import os
-import magic
 from PIL import Image
 from PIL.PngImagePlugin import PngImageFile
 import fitz  # PyMuPDF
 from datetime import datetime
+import mimetypes
 
 def extract_image_metadata(image_path):
     """
@@ -83,8 +83,11 @@ def extract_file_metadata(file_path):
         dict: Basic file metadata.
     """
     try:
+        # Use mimetypes to guess the file type
+        mime_type, _ = mimetypes.guess_type(file_path)
+        
         file_metadata = {
-            "file_type": magic.from_file(file_path, mime=True),
+            "file_type": mime_type if mime_type else "Unknown",
             "file_size": os.path.getsize(file_path),
             "last_modified": datetime.fromtimestamp(os.path.getmtime(file_path)).strftime("%Y-%m-%d %H:%M:%S"),
             "created": datetime.fromtimestamp(os.path.getctime(file_path)).strftime("%Y-%m-%d %H:%M:%S"),
