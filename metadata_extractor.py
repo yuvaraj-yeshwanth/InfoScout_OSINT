@@ -1,9 +1,6 @@
 import os
 from PIL import Image
-from PIL.PngImagePlugin import PngImageFile
-import fitz  # PyMuPDF
 from datetime import datetime
-import mimetypes
 
 def extract_image_metadata(image_path):
     """
@@ -34,44 +31,6 @@ def extract_image_metadata(image_path):
     except Exception as e:
         return {"error": f"Could not extract metadata from image: {e}"}
 
-def extract_pdf_metadata(pdf_path):
-    """
-    Extracts metadata from PDF files.
-
-    Args:
-        pdf_path (str): Path to the PDF file.
-    
-    Returns:
-        dict: Extracted metadata.
-    """
-    try:
-        doc = fitz.open(pdf_path)
-        metadata = doc.metadata
-        # Get document creation and modification dates
-        creation_date = doc.metadata.get("creationDate", "Unknown")
-        modification_date = doc.metadata.get("modDate", "Unknown")
-        metadata["created"] = parse_pdf_date(creation_date)
-        metadata["modified"] = parse_pdf_date(modification_date)
-        return metadata
-    except Exception as e:
-        return {"error": f"Could not extract metadata from PDF: {e}"}
-
-def parse_pdf_date(date_str):
-    """
-    Helper function to parse PDF date format (e.g., D:20240112120000+00'00').
-
-    Args:
-        date_str (str): The PDF date string.
-    
-    Returns:
-        str: The parsed date in a readable format.
-    """
-    try:
-        date_str = date_str[2:]  # Remove "D:"
-        return datetime.strptime(date_str, "%Y%m%d%H%M%S%z").strftime("%Y-%m-%d %H:%M:%S")
-    except Exception:
-        return "Invalid date format"
-
 def extract_file_metadata(file_path):
     """
     Extracts general metadata from files including file type, size, and last modified date.
@@ -83,11 +42,7 @@ def extract_file_metadata(file_path):
         dict: Basic file metadata.
     """
     try:
-        # Use mimetypes to guess the file type
-        mime_type, _ = mimetypes.guess_type(file_path)
-        
         file_metadata = {
-            "file_type": mime_type if mime_type else "Unknown",
             "file_size": os.path.getsize(file_path),
             "last_modified": datetime.fromtimestamp(os.path.getmtime(file_path)).strftime("%Y-%m-%d %H:%M:%S"),
             "created": datetime.fromtimestamp(os.path.getctime(file_path)).strftime("%Y-%m-%d %H:%M:%S"),
@@ -99,7 +54,7 @@ def extract_file_metadata(file_path):
 
 def extract_metadata(file_path):
     """
-    Extracts metadata from a variety of files (images, PDFs, etc.).
+    Extracts metadata from a variety of files (images, etc.).
 
     Args:
         file_path (str): Path to the file.
@@ -108,31 +63,4 @@ def extract_metadata(file_path):
         dict: Extracted metadata.
     """
     if not os.path.exists(file_path):
-        return {"error": "File does not exist"}
-
-    file_extension = file_path.lower().split('.')[-1]
-
-    # Extract file metadata
-    metadata = extract_file_metadata(file_path)
-
-    # Extract specific metadata based on file type
-    if file_extension in ['jpg', 'jpeg', 'png', 'gif']:
-        image_metadata = extract_image_metadata(file_path)
-        metadata.update(image_metadata)
-    elif file_extension == 'pdf':
-        pdf_metadata = extract_pdf_metadata(file_path)
-        metadata.update(pdf_metadata)
-    
-    return metadata
-
-if __name__ == "__main__":
-    # Example usage
-    file_path = input("Enter the path of the file to extract metadata: ").strip()
-    metadata = extract_metadata(file_path)
-    
-    if "error" in metadata:
-        print(f"Error: {metadata['error']}")
-    else:
-        print("\nExtracted Metadata:")
-        for key, value in metadata.items():
-            print(f"{key}: {value}")
+        r
